@@ -1,0 +1,162 @@
+body,h1,h2,h3,p,quote,small,form,input,ul,li,ol,label{
+    /* The reset rules */
+    margin:0px;
+    padding:0px;
+}
+
+body{
+    color:#555555;
+    font-size:13px;
+    background: #eeeeee;
+    font-family:Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+h1{
+    font-size:28px;
+    font-weight:bold;
+    font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+    letter-spacing:1px;
+}
+
+h2{
+    font-family:"Arial Narrow",Arial,Helvetica,sans-serif;
+    font-size:10px;
+    font-weight:normal;
+    letter-spacing:1px;
+    padding-left:2px;
+    text-transform:uppercase;
+    white-space:nowrap;
+    margin-top:4px;
+    color:#888888;
+}
+
+#main p{
+    padding-bottom:8px;
+}
+
+.clear{
+    clear:both;
+}
+
+#main{
+    width:800px;
+    /* Centering it in the middle of the page */
+    margin:60px auto;
+}
+
+.container{
+    margin-top:20px;
+
+    background:#FFFFFF;
+    border:1px solid #E0E0E0;
+    padding:15px;
+
+    /* Rounded corners */
+    -moz-border-radius:20px;
+    -khtml-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius:20px;
+}
+
+.err{
+    color:red;
+}
+
+.success{
+    color:#00CC00;
+}
+
+a, a:visited {
+    color:#00BBFF;
+    text-decoration:none;
+    outline:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+.chartBox, .nodeBox{
+    background-color: #c0c0c0; padding: 0; color: #335500;
+    padding: 3px; border: 1px solid black;
+    width: 325px;
+}
+nav{
+    display: block;
+    width: 960px;
+}
+nav ul{
+    list-style: none;
+}
+nav li{
+    display: inline-block;
+}
+nav a{
+    display: inline-block;
+    font-size: 15px;
+    color: #00BBFF;
+    padding: 5px 10px;
+
+}
+nav a:hover{
+    border: 1px solid grey;
+    background: white;
+}
+nav a:active{
+    background: grey;
+}
+nav select{
+    display: none;
+}
+
+@media (max-width: 960px) {
+    nav ul     { display: none; }
+    nav select { display: inline-block; }
+}
+.chartBox{ 
+    width: 325px; 
+    height: 260px; 
+    margin:10px; 
+    /*float:left; */
+    background:#161613; 
+    border: solid 2px #8399AF; 
+    overflow: hidden; 
+    position: relative; 
+}
+.chartBox img{ 
+    position: absolute; 
+    top: 0px; 
+    left: 0; 
+    border: 0; 
+}
+.chartBox p{ 
+    padding: 0 10px; 
+    color:#afafaf; 
+    font-weight:bold; 
+    font:10pt "Lucida Grande", Arial, sans-serif; 
+}
+
+.boxcaption{ 
+    float: left; 
+    position: absolute; 
+    background: #000; 
+    height: 100px; 
+    width: 100%; 
+    opacity: .8; 
+    /* For IE 5-7 */
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    /* For IE 8 */
+    -MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+.caption .boxcaption {
+    top: 220px;
+    left: 0;
+}
+.chartBox h3{
+    margin: 10px 10px 0 10px; 
+    color:#FFF; 
+    font:18pt Arial, sans-serif; 
+    letter-spacing:-1px; 
+    font-weight: bold;
+}
