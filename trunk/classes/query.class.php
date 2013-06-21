@@ -6,6 +6,7 @@
  * @author xaelvil
  */
 require_once 'db.class.php';
+
 class query {
 
     private $pdo = '';
@@ -123,6 +124,14 @@ class query {
 
         return $query->fetchAll();
     }
+
+    /*
+     * An example
+      $args1 = array("customer_id" => $customer);
+      $args2 = array("id" => $nodeId);
+      $result = $query->join2Query('company', 'node', 'a.chart_id = b.chart_id', $args1, $args2, 'id', 'name');
+     * 
+     */
 
     public function join2Query($table1_name, $table2_name, $cond, $params1, $params2, $get1, $get2) {
         //select join, no * allowed
@@ -841,17 +850,17 @@ class query {
         }
     }
 
+    /*
+     * An example
+      $args = array("display_name" => $name,
+      "user_pass" => md5($this->pass),
+      "user_email" => $user,
+      "user_registered" => $mysqldate );
+      $insert = $query->insert("users", $args);
+     * 
+     */
+
     public function insert($table, $fields) {
-        /*
-         * An example
-         $args = array("display_name" => $name,
-          "user_pass" => md5($this->pass),
-          "user_email" => $user,
-          "user_registered" => $mysqldate
-          );
-          $insert = $this->query->insert("users", $args);
-         * 
-         */
         if (is_array($fields)) {
             $size = sizeof($fields);
             $i = 1;
