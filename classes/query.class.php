@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class for querys the database
+ * Class for querys to the database
  *
  * @author xaelvil
  */
@@ -28,39 +28,90 @@ class query {
         $this->pdo = new PDO($dsn, $this->user, $this->pass, $this->opt);
     }
 
-    /* public function authToNode($nodeId) {
-
-      $customer = $_SESSION['customer_id'];
-      $args1 = array("customer_id" => $customer);
-      $args2 = array("id" => $nodeId);
-
-      $result = self::join2Query('chart_company', 'node', 'a.chart_id = b.chart_id', $args1, $args2, 'chart_id', '');
-
-      if ($result) {
-      return true;
-      } else {
-      return false;
-      }
-      } */
-
-    /* public function authToChart($chartId) {
-      $customer = $_SESSION['customer_id'];
-      $args = array('customer_id' => $customer);
-      $args = array('chart_id' => $chartId) + $args;
-      $result = self::easyQuery("chart_company", $args, "*");
-
-      if ($result) {
-      return true;
-      } else {
-      return false;
-      }
-      } */
-
     public function getCount($table) {
 
         $q = 'select count(*) from ' . $table;
         $query = $this->pdo->prepare($q);
         $query->execute();
+        $return = $query->fetchAll();
+        if (is_array($return) && isset($return[0]['count(*)']))
+            return $return[0]['count(*)'];
+    }
+    
+    public function getCountWParams($table_name, $params) {
+
+        $q = 'select count(*) from ' . $table_name;
+
+        if (is_array($params)) {
+            $size = sizeof($params);
+            $i = 1;
+            foreach ($params as $key => $value) {
+                switch ($i) {
+                    case 1:
+                        $param1_n = $key;
+                        $param1_v = $value;
+                        break;
+
+                    case 2:
+                        $param2_n = $key;
+                        $param2_v = $value;
+                        break;
+                    case 3:
+                        $param3_n = $key;
+                        $param3_v = $value;
+                        break;
+                    case 4:
+                        $param4_n = $key;
+                        $param4_v = $value;
+                        break;
+                    case 5:
+                        $param5_n = $key;
+                        $param5_v = $value;
+                        break;
+                }
+                $i++;
+            }
+            unset($key);
+            unset($value);
+            unset($i);
+        } else {
+            $size = 0;
+        }
+        switch ($size) {
+            case 1:
+                $q = $q . ' where ' . $param1_n . ' = ?';
+                $query = $this->pdo->prepare($q);
+                $query->execute(array($param1_v));
+                break;
+            case 2:
+                $q = $q . ' where ' . $param1_n . ' = ? and ' . $param2_n . ' = ?';
+                $query = $this->pdo->prepare($q);
+                $query->execute(array($param1_v, $param2_v));
+                break;
+            case 3:
+                $q = $q . ' where ' . $param1_n . ' = ? and ' . $param2_n . ' = ? and '
+                        . $param3_n . ' = ?';
+                $query = $this->pdo->prepare($q);
+                $query->execute(array($param1_v, $param2_v, $param3_v));
+                break;
+            case 4:
+                $q = $q . ' where ' . $param1_n . ' = ? and ' . $param2_n . ' = ? and '
+                        . $param3_n . ' = ? and ' . $param4_n . ' = ?';
+                $query = $this->pdo->prepare($q);
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v));
+                break;
+            case 5:
+                $q = $q . ' where ' . $param1_n . ' = ? and ' . $param2_n . ' = ? and '
+                        . $param3_n . ' = ? and ' . $param4_n . ' = ? and ' . $param5_n . ' = ?';
+                $query = $this->pdo->prepare($q);
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v));
+                break;
+            default:
+                $query = $this->pdo->prepare($q);
+                $query->execute();
+                break;
+        }
+
         $return = $query->fetchAll();
         if (is_array($return) && isset($return[0]['count(*)']))
             return $return[0]['count(*)'];
