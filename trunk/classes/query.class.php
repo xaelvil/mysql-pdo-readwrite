@@ -121,7 +121,7 @@ class query {
         if ($out) {
             return '{"records":' . json_encode($result) . '}';
         } else {
-            return $result;
+            return json_encode($result);
         }
     }
 
