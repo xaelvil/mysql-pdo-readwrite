@@ -1,12 +1,10 @@
 <?php
 
 /**
- * Class for querys to the database
+ * Class for querys the database
  *
  * @author xaelvil
  */
-require_once 'db.class.php';
-
 class query {
 
     private $pdo = '';
@@ -29,6 +27,34 @@ class query {
         $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->databaseName . ";charset=utf8";
         $this->pdo = new PDO($dsn, $this->user, $this->pass, $this->opt);
     }
+
+    /* public function authToNode($nodeId) {
+
+      $customer = $_SESSION['customer_id'];
+      $args1 = array("customer_id" => $customer);
+      $args2 = array("id" => $nodeId);
+
+      $result = self::join2Query('chart_company', 'node', 'a.chart_id = b.chart_id', $args1, $args2, 'chart_id', '');
+
+      if ($result) {
+      return true;
+      } else {
+      return false;
+      }
+      } */
+
+    /* public function authToChart($chartId) {
+      $customer = $_SESSION['customer_id'];
+      $args = array('customer_id' => $customer);
+      $args = array('chart_id' => $chartId) + $args;
+      $result = self::easyQuery("chart_company", $args, "*");
+
+      if ($result) {
+      return true;
+      } else {
+      return false;
+      }
+      } */
 
     public function getCount($table) {
 
@@ -126,13 +152,12 @@ class query {
     }
 
     /*
-     * An example
+     * 
       $args1 = array("customer_id" => $customer);
       $args2 = array("id" => $nodeId);
       $result = $query->join2Query('company', 'node', 'a.chart_id = b.chart_id', $args1, $args2, 'id', 'name');
      * 
      */
-
     public function join2Query($table1_name, $table2_name, $cond, $params1, $params2, $get1, $get2) {
         //select join, no * allowed
         //$q query
@@ -859,8 +884,8 @@ class query {
       $insert = $query->insert("users", $args);
      * 
      */
-
     public function insert($table, $fields) {
+
         if (is_array($fields)) {
             $size = sizeof($fields);
             $i = 1;
@@ -963,104 +988,105 @@ class query {
             case 1:
                 $q = $q . '(' . $param1_n . ') VALUES( ? )';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v));
+                $query->execute(array($param1_v));
                 break;
             case 2:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ') VALUES( ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v));
+                $query->execute(array($param1_v, $param2_v));
                 break;
             case 3:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ') VALUES( ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v));
                 break;
             case 4:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ') VALUES( ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v));
                 break;
             case 5:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ') VALUES( ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v));
                 break;
             case 6:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ') VALUES( ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v));
                 break;
             case 7:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v));
                 break;
             case 8:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v));
                 break;
             case 9:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v));
                 break;
             case 10:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v));
                 break;
             case 11:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v));
                 break;
             case 12:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v));
                 break;
             case 13:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v));
                 break;
             case 14:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v));
                 break;
             case 15:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ',' . $param15_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v));
                 break;
             case 16:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ',' . $param15_n . ',' . $param16_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v));
                 break;
             case 17:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ',' . $param15_n . ',' . $param16_n . ',' . $param17_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v));
                 break;
             case 18:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ',' . $param15_n . ',' . $param16_n . ',' . $param17_n . ',' . $param18_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v, $param18_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v, $param18_v));
                 break;
             case 19:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ',' . $param15_n . ',' . $param16_n . ',' . $param17_n . ',' . $param18_n . ',' . $param19_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v, $param18_v, $param19_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v, $param18_v, $param19_v));
                 break;
             case 20:
                 $q = $q . '(' . $param1_n . ',' . $param2_n . ',' . $param3_n . ',' . $param4_n . ',' . $param5_n . ',' . $param6_n . ',' . $param7_n . ',' . $param8_n . ',' . $param9_n . ',' . $param10_n . ',' . $param11_n . ',' . $param12_n . ',' . $param13_n . ',' . $param14_n . ',' . $param15_n . ',' . $param16_n . ',' . $param17_n . ',' . $param18_n . ',' . $param19_n . ',' . $param20_n . ') VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 $query = $this->pdo->prepare($q);
-                return $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v, $param18_v, $param19_v, $param20_v));
+                $query->execute(array($param1_v, $param2_v, $param3_v, $param4_v, $param5_v, $param6_v, $param7_v, $param8_v, $param9_v, $param10_v, $param11_v, $param12_v, $param13_v, $param14_v, $param15_v, $param16_v, $param17_v, $param18_v, $param19_v, $param20_v));
                 break;
         }
+        return $this->pdo->lastInsertId();
     }
 
     public function truncate($table) {
