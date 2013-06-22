@@ -50,7 +50,8 @@ $(function(){
         var paramsDiv = $("#params");
         $('<p>'
             +'<input type="text" id="paramName'+i+'" size="20" value="" placeholder="Param name" /> '
-            +'<input type="text" id="paramValue'+i+'" size="20" value="" placeholder="value" />'
+            +'<input type="text" id="paramValue'+i+'" size="80" value="" placeholder="value" />'
+            +'<select id="select'+i+'"><option name="text" value="text">text</option><option name="json" value="json">json</option></select>'
             +'<button class="button" id="rem'+i+'">-</button></p>').appendTo(paramsDiv);
         
         i++;
@@ -60,6 +61,7 @@ $(function(){
     $("#test").click(function(){
         var paramNameA = new Array();
         var paramValueA = new Array();
+        var selectA = new Array();
         var params = '{';
         var j=0;
         var result = $("#result");
@@ -79,13 +81,19 @@ $(function(){
             while (j<i){
                 var paramName = '#paramName'+j;
                 var paramValue = '#paramValue'+j;
+                var select = '#select'+j;
             
                 paramNameA.push($(paramName).val());
                 paramValueA.push($(paramValue).val());
+                selectA.push($(select).val());
                 j++;
             }
             for ( var k = 0, param; param = paramNameA[k]; k++ ) {
-                params = params+ '"'+param+'":"'+paramValueA[k] +'",';
+                if (selectA[k] == "text"){ 
+                    params = params+ '"'+param+'":"'+paramValueA[k] +'",';
+                }else if(selectA[k] == "json"){
+                    params = params+ '"'+param+'":'+paramValueA[k]+",";
+                }
             }
             if (j == 0){
                 params = "";
@@ -96,7 +104,7 @@ $(function(){
                 params = $.parseJSON(params);
             }
             $.post(
-                'services.php',
+                '../services.php',
                 {
                     exec: $("#service").val(),
                     params: params
@@ -125,11 +133,4 @@ $(function(){
         }
     });   
  
-});
-            
-            
-            
-
-
-
-	
+});	
