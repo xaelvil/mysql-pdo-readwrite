@@ -28,6 +28,8 @@ class query {
         $this->databaseName = $db->getDatabaseName();
         $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->databaseName . ";charset=utf8";
         $this->pdo = new PDO($dsn, $this->user, $this->pass, $this->opt);
+        $this->paramsName = array();
+        $this->paramsValue = array();
     }
 
     private function fillParams($params) {
@@ -79,6 +81,8 @@ class query {
 
         $query = $this->pdo->prepare($q);
         $query->execute($this->paramsValue);
+        $this->paramsName = array();
+        $this->paramsValue = array();
         $return = $query->fetchAll();
         if (is_array($return) && isset($return[0]['count(*)']))
             return $return[0]['count(*)'];
@@ -121,6 +125,8 @@ class query {
 
         $query = $this->pdo->prepare($q);
         $query->execute($this->paramsValue);
+        $this->paramsName = array();
+        $this->paramsValue = array();
         return $query->fetchAll();
     }
 
@@ -154,6 +160,8 @@ class query {
 
         $query = $this->pdo->prepare($q);
         $query->execute($this->paramsValue);
+        $this->paramsName = array();
+        $this->paramsValue = array();
         return $query->fetchAll();
     }
 
@@ -896,7 +904,7 @@ class query {
         if (is_array($fields))
             $size = self::fillParams($fields);
 
-        $q = 'INSERT INTO ' . $table;
+        $q = 'INSERT INTO ' . $table . ' ';
         switch ($size) {
             case 1:
                 $q = $q . '(' . $this->paramsName[0] . ') VALUES( ? )';
@@ -962,6 +970,8 @@ class query {
 
         $query = $this->pdo->prepare($q);
         $query->execute($this->paramsValue);
+        $this->paramsName = array();
+        $this->paramsValue = array();
         return $this->pdo->lastInsertId();
     }
 
