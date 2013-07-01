@@ -89,6 +89,7 @@ class query {
     }
 
     public function prepareResult($result, $out = true) {
+        $result = (isset($result) ) ? $result : '';
         if ($out) {
             return '{"records":' . json_encode($result) . '}';
         } else {
