@@ -169,7 +169,7 @@ class query {
      * 
       $args1 = array("customer_id" => $customer);
       $args2 = array("id" => $nodeId);
-      $result = $query->join2Query('company', 'node', 'a.chart_id = b.chart_id', $args1, $args2, 'id', 'name');
+      $result = $query->join2Query('company', 'node', 'a.chart_id = b.chart_id', $args1, $args2, 'id', 'name|car');
      * 
      */
 
