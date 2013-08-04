@@ -522,7 +522,7 @@ class query {
             return;
         }
         if (is_array($where)) {
-            $sizeWhere = sizeof($fields);
+            $sizeWhere = sizeof($where);
             $i = 1;
             foreach ($where as $key => $value) {
                 switch ($i) {
