@@ -104,7 +104,7 @@ $(function(){
                 params = $.parseJSON(params);
             }
             $.post(
-                '../services.php',
+                'services.php',
                 {
                     exec: $("#service").val(),
                     params: params
