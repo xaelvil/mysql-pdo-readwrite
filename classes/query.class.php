@@ -5,6 +5,7 @@
  *
  * @author xaelvil
  */
+require_once 'db.class.php';
 class query {
 
     private $pdo = '';
