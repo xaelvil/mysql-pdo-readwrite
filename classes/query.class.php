@@ -982,6 +982,12 @@ class query {
         $query = $this->pdo->prepare($q);
         return $query->execute();
     }
+    
+    public function customSQL($sql){
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
 
 }
 
