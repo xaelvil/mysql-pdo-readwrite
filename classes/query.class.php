@@ -99,7 +99,7 @@ class query {
     }
 
     public function easyQuery($table_name, $params, $get) {
-
+        $size = "";
         $q = 'SELECT ' . $get . ' from ' . $table_name;
 
         if (is_array($params))
@@ -133,7 +133,7 @@ class query {
     }
 
     public function deleteWhere($table_name, $params) {
-
+        $size = "";
         $q = 'DELETE FROM ' . $table_name;
 
         if (is_array($params))
@@ -164,7 +164,7 @@ class query {
         $query->execute($this->paramsValue);
         $this->paramsName = array();
         $this->paramsValue = array();
-        return $query->fetchAll();
+        return;
     }
 
     /*
@@ -988,7 +988,7 @@ class query {
         $query->execute();
         return $query->fetchAll();
     }
-
+    
 }
 
 ?>
